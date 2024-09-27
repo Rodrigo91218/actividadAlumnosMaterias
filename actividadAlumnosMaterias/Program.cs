@@ -12,6 +12,7 @@ namespace actividadAlumnosMaterias
         {
             List<Materias> materias = new List<Materias>();
             List<Alumnos> alumnos = new List<Alumnos>();
+            List<Inscripciones> inscripciones= new List<Inscripciones>();
 
             int opcion; //acá vamos a guardar la opción elegida
             do
@@ -24,13 +25,16 @@ namespace actividadAlumnosMaterias
                         CargarMaterias(materias);
                         break;
                     case 2:
-
+                        CargarAlumno(alumnos);
                         break;
                     case 3:
-
+                        CargarInscripcion(inscripciones);
                         break;
                     case 4:
-
+                        Console.WriteLine("Ingrese la materia a buscar:");
+                        string buscado = Console.ReadLine();
+                        List<Materias> materiasEncontrados = BuscarMaterias(materias, buscado);
+                        MostrarMaterias(materiasEncontrados);
                         break;
                     case 5:
 
@@ -76,18 +80,13 @@ namespace actividadAlumnosMaterias
         private static void CargarMaterias(List<Materias> materias)
         {
             Materias m = new Materias();
-            Console.WriteLine("Cargar materias\n");
+            Console.WriteLine("Cargar materias");
 
             Console.WriteLine("Ingrese el nombre de la materia: ");
             m.NombreMateria = Console.ReadLine();
             materias.Add(m);
 
             Console.WriteLine("La materia se agrego exitosamente!.");
-            /*
-            foreach (Materias mat in materias)
-            {
-                Console.WriteLine(mat);
-            }*/
 
         }
         private static void CargarAlumno(List<Alumnos> alumnos)
@@ -100,9 +99,75 @@ namespace actividadAlumnosMaterias
             Console.WriteLine("ingresar fecha de nacimiento: ");
             a.FechaNacimiento = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("ingresar documento:");
-            a.Documento = ;
+            a.Documento = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ingrese el número de legajo: "
+            a.Legajo=int.Parse(Console.ReadLine());
+            alumnos.Add(a);
+            Console.WriteLine("El alumno se agrego exitosamente!.");
         }
+        private static void CargarInscripcion(List<Inscripciones> inscripciones)
+        {
+            Inscripciones i = new Inscripciones();
+            Console.WriteLine("Ingrese los datos para cargar la inscripción");
+            Console.WriteLine("Año lectivo: ");
+            i.AñoLectivo = int.Parse(Console.ReadLine());
+            Console.WriteLine("Materia: ");
+            i.Materias = Console.ReadLine();
+            Console.WriteLine("Nombre y apellido del alumno: ");
+            i.Alumnos=Console.ReadLine();
+            if (Alumnos == Alumnos)
+            {
+                do
+                {
+                    Console.WriteLine("Error. Alumno cargado anteriormente."
+                    Console.WriteLine("Cargue el nombre y apellido de un alumno nuevo: ");
+                    i.Alumnos = Console.ReadLine();
+                } while (Alumnos != Alumnos);
+            }
+            do
+            {
+                Console.WriteLine("Ingrese 'a' para Aprobado o 'd' para Desaprobado:");
+                i.Aprobado = Console.ReadLine();
 
+                if (Aprobado == "a")
+                {
+                    aprobado = true;
+                }
+                else if (Aprobado == "d")
+                {
+                    aprobado = false;
+                }
+                else
+                {
+                    Console.WriteLine("Error. Por favor ingrese 'a' o 'd'.");
+                }
+
+            } while (Aprobado != "a" && Aprobado != "d");
+
+            Console.WriteLine("Estado: " + (aprobado ? "Aprobado" : "Desaprobado"));
+            inscripciones.Add(i);
+            Console.WriteLine("La inscripción se cargo exitosamente!.");
+        }
+        private static void MostrarMaterias(List<Materias> nombreMaterias)
+        {
+            foreach (Materias m in nombreMaterias)
+            {
+                Console.WriteLine(m);
+            }
+        }
+        private static List<Materias> BuscarMaterias(List<Materias> nombreMaterias, string buscado)
+        {
+            List<Materias> encontrados = new List<Materias>();
+            buscado = buscado.ToLower().Trim();
+            foreach (Materias m in nombreMaterias)
+            {
+                if (m.NombreMateria.ToLower().Contains(buscado))
+                {
+                    encontrados.Add(m);
+                }
+            }
+            return encontrados;
+        }
 
     }
 

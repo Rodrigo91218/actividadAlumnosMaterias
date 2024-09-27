@@ -30,6 +30,14 @@ namespace actividadAlumnosMaterias
             this.alumnos = alumnos;
             this.aprobado = aprobado;
         }
+
+        public Inscripciones()
+        {
+            this.añoLectivo =2024;
+            this.materia = "";
+            this.alumnos = "";
+            this.bool=false;
+        }
         #endregion
     }
 }
